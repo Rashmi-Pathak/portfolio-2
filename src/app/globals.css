@@ -1,0 +1,287 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "DisplayCondensed";
+  src: url("/assets/fonts/NotoSans-CondensedBlack.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DisplayInter";
+  src: url("/assets/fonts/InterDisplay-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BodyInter";
+  src: url("/assets/fonts/InterDisplay-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MonoTech";
+  src: url("/assets/fonts/NotoMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "EditorialSerif";
+  src: url("/assets/fonts/EBGaramond-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --paper: #efe8d8;
+  --paper-alt: #e7decb;
+  --ink: #11100f;
+  --charcoal: #211c18;
+  --charcoal-deep: #171411;
+  --cream-ink: #f0e4c9;
+  --muted: #766e62;
+  --rule: rgba(17, 16, 15, 0.22);
+  --rule-strong: #11100f;
+  --rule-light: rgba(240, 228, 201, 0.22);
+
+  /* Accent swatch system (default: crimson) */
+  --accent: #b51f2b;
+  --accent-bright: #e03a3e;
+  --accent-dark: #8e1620;
+}
+
+[data-accent="terracotta"] {
+  --accent: #9e3528;
+  --accent-bright: #c84b3b;
+  --accent-dark: #742319;
+}
+
+[data-accent="cobalt"] {
+  --accent: #1d498f;
+  --accent-bright: #2e67c2;
+  --accent-dark: #133263;
+}
+
+[data-accent="forest"] {
+  --accent: #226142;
+  --accent-bright: #2f855a;
+  --accent-dark: #16422c;
+}
+
+html {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: "BodyInter", system-ui, -apple-system, sans-serif;
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Typography utilities */
+.font-display {
+  font-family: "DisplayCondensed", "DisplayInter", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 0.86;
+}
+
+.font-mono-tech {
+  font-family: "MonoTech", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.font-editorial {
+  font-family: "EditorialSerif", Georgia, serif;
+  font-style: italic;
+}
+
+/* Outlined display text (PATHAK & ghosted section numbers) */
+.text-outline-ink {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ink);
+}
+
+.text-outline-ghost {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(17, 16, 15, 0.16);
+}
+
+.text-outline-ghost-light {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(240, 228, 201, 0.14);
+}
+
+/* Paper grain overlays */
+.paper-grain-light {
+  background-image: url("/assets/backgrounds/ivory_paper_grain_overlay.png");
+  background-size: 560px auto;
+  background-repeat: repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.paper-grain-dark {
+  background-image: url("/assets/backgrounds/dark_section_grain_overlay.webp");
+  background-size: 700px auto;
+  background-repeat: repeat;
+  opacity: 0.24;
+  pointer-events: none;
+}
+
+/* Skewed CTA shape matching reference */
+.cta-skew {
+  clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+}
+
+/* Manga slanted panel clip-paths for Selected Work */
+@media (min-width: 768px) {
+  .work-slant-left {
+    clip-path: polygon(0 0, 100% 0, 95.5% 100%, 0 100%);
+  }
+  .work-slant-right {
+    clip-path: polygon(4.5% 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* Target Cursor */
+.target-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  --target-cursor-color: var(--accent-bright);
+}
+
+.target-cursor__corner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: var(--target-cursor-color, #b51f2b);
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.target-cursor__corner--tl {
+  border-width: 2.5px 0 0 2.5px;
+}
+.target-cursor__corner--tr {
+  border-width: 2.5px 2.5px 0 0;
+}
+.target-cursor__corner--br {
+  border-width: 0 2.5px 2.5px 0;
+}
+.target-cursor__corner--bl {
+  border-width: 0 0 2.5px 2.5px;
+}
+
+.target-cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--target-cursor-color, #b51f2b);
+  will-change: transform;
+}
+
+.target-cursor__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--target-cursor-color, #b51f2b);
+  font-family: "MonoTech", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Focus indicators (accessible 3:1+ contrast) */
+:where(a:any-link, button, [tabindex="0"]):focus-visible {
+  outline: 3px solid var(--accent-bright);
+  outline-offset: 3px;
+}
+
+/* Visually hidden skip link */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 9999;
+  background: var(--ink);
+  color: var(--cream-ink);
+  padding: 10px 16px;
+  font-family: "MonoTech", monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Ticker keyframes */
+@keyframes ticker-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes ticker-scroll-reverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 28s linear infinite;
+}
+
+.animate-ticker-reverse {
+  animation: ticker-scroll-reverse 32s linear infinite;
+}
+
+/* Pause / disable non-essential motion when user toggles MOTION OFF or prefers-reduced-motion */
+[data-motion="off"] .animate-ticker,
+[data-motion="off"] .animate-ticker-reverse {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker,
+  .animate-ticker-reverse {
+    animation-play-state: paused !important;
+  }
+}
