@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: "Rashmi Pathak — Software Engineer · AI / ML · Full-Stack",
   description:
     "Portfolio of Rashmi Pathak — Third-year B.Tech IT student building full-stack and AI-driven products across machine learning, web development, and fintech.",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

@@ -9,10 +9,10 @@ import type { AccentTheme } from "@/data/portfolio";
 import { getCaseStudyBySlug } from "@/data/caseStudies";
 
 const NAV_LINKS = [
-  { href: "/#work", num: "02", label: "WORK" },
-  { href: "/#stack", num: "04", label: "STACK" },
-  { href: "/#about", num: "05", label: "ABOUT" },
-  { href: "/#contact", num: "08", label: "CONTACT" },
+  { href: "/#work", num: "01", label: "WORK", matchChapter: "02" },
+  { href: "/#stack", num: "02", label: "STACK", matchChapter: "04" },
+  { href: "/#about", num: "03", label: "ABOUT", matchChapter: "05" },
+  { href: "/#contact", num: "04", label: "CONTACT", matchChapter: "08" },
 ];
 
 const SWATCHES: { id: AccentTheme; label: string; color: string }[] = [
@@ -37,7 +37,7 @@ export function Navbar() {
   const isWorkDetail = pathname.startsWith("/work/");
   const slug = isWorkDetail ? pathname.replace("/work/", "") : "";
   const activeStudy = slug ? getCaseStudyBySlug(slug) : undefined;
-  const activeNum = isWorkDetail ? "02" : activeChapter.slice(0, 2);
+  const activeChapterNum = isWorkDetail ? "02" : activeChapter.slice(0, 2);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[var(--ink)] bg-[var(--paper)]">
@@ -74,7 +74,7 @@ export function Navbar() {
         <div className="hidden items-center gap-7 md:flex">
           <nav aria-label="Primary" className="flex items-center gap-6">
             {NAV_LINKS.map((link) => {
-              const isActive = activeNum === link.num;
+              const isActive = activeChapterNum === link.matchChapter;
               return (
                 <a
                   key={link.href}
